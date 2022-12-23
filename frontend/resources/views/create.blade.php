@@ -1,9 +1,5 @@
 @extends('components.parent')
 @section('content')
-<div class="mb-4">
-    <a href="{{ route('book.list') }}" class="py-[10px] px-[15px] rounded-lg bg-blue-500 text-white">Back to
-        home</a>
-</div>
 <!-- component -->
 <div class="mb-4">
     <a href="{{ route('book.list') }}" class="py-[10px] px-[15px] rounded-lg bg-blue-500 text-white">Back to
@@ -19,6 +15,9 @@
             </div>
             <p class="mt-2 text-sm text-gray-400">Lorem ipsum is placeholder text.</p>
         </div>
+        @if($errors->any())
+            <div class="bg-red-500 w-full p-2 mt-2">{{ $errors->first() }}</div>
+        @endif
         <form class="mt-8 space-y-3" action="{{ route('book.store') }}" method="POST"
             enctype="multipart/form-data">
             @csrf
@@ -43,12 +42,12 @@
                     <option disabled @if (!old('category_id')) selected @endif> -- select an
                         option
                         -- </option>
-                    @foreach ([1, 2, 3, 4, 5] as $category)
-                    @if (old('category_id'))
-                    <option value="{{ $category }}" selected>{{ $category }}</option>
-                    @else
-                    <option value="{{ $category }}">{{ $category }}</option>
-                    @endif
+                    @foreach ($categories as $category)
+                        @if (old('category_id'))
+                            <option value="{{ $category["id"] }}" selected>{{ $category["id"] }}</option>
+                        @else
+                            <option value="{{ $category["id"] }}">{{ $category["nama_category"] }}</option>
+                        @endif
                     @endforeach
                 </select>
 
@@ -64,11 +63,11 @@
                     class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                     name="author_id" id="author">
                     <option disabled @if (!old('author_id')) selected @endif> -- select an option -- </option>
-                    @foreach ([1, 2, 3, 4, 5] as $author)
+                    @foreach ($authors as $author)
                     @if (old('author_id'))
-                    <option value="{{ $author }}" selected>{{ $author }}</option>
+                    <option value="{{ $author['id'] }}" selected>{{ $author['nama_author'] }}</option>
                     @else
-                    <option value="{{ $author }}">{{ $author }}</option>
+                    <option value="{{ $author['id'] }}">{{ $author['nama_author'] }}</option>
                     @endif
                     @endforeach
                 </select>

@@ -20,7 +20,7 @@ class CategoryController extends Controller
     }
 
     public function store(Request $request){
-        if(!$request->nama){
+        if(!$request->nama_category){
             return response()->json([
                 'status' => false,
                 'message' => 'Nama category tidak valid',
@@ -76,7 +76,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         
-        if(!$request->nama){
+        if(!$request->nama_category){
             return response()->json([
                 'status' => false,
                 'message' => 'Nama category tidak valid',

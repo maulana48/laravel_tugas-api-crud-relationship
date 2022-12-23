@@ -15,6 +15,9 @@
                 </div>
                 <p class="mt-2 text-sm text-gray-400">Lorem ipsum is placeholder text.</p>
             </div>
+            @if($errors->any())
+                <div class="bg-red-500 w-full p-2 mt-2">{{ $errors->first() }}</div>
+            @endif
             <form class="mt-8 space-y-3" action="{{ route('book.update', $book[0]['id']) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf

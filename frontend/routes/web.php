@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\{ HomeController,  CategoryController, AuthorController};
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +35,32 @@ Route::prefix('Book')
         Route::post('/', 'store')->name('store');
         Route::post('/update/{book}', 'update')->name('update');
         Route::post('/{book}', 'destroy')->name('destroy');
+    });
+
+Route::prefix('Category')
+    ->name('category.')
+    ->controller(CategoryController::class)
+    ->group(function(){
+        Route::get('/', 'index')->name('list');
+        
+        Route::get('/create', 'create')->name('create');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+
+        Route::post('/', 'store')->name('store');
+        Route::post('/update/{category}', 'update')->name('update');
+        Route::post('/{category}', 'destroy')->name('destroy');
+    });
+
+Route::prefix('Author')
+    ->name('author.')
+    ->controller(AuthorController::class)
+    ->group(function(){
+        Route::get('/', 'index')->name('list');
+        
+        Route::get('/create', 'create')->name('create');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        
+        Route::post('/', 'store')->name('store');
+        Route::post('/update/{author}', 'update')->name('update');
+        Route::post('/{author}', 'destroy')->name('destroy');
     });

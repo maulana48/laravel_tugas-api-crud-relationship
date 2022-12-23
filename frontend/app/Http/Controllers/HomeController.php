@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\{ Request, Response };
 use App\Helpers\HttpClient;
 
 class HomeController extends Controller
@@ -57,6 +57,27 @@ class HomeController extends Controller
         ]);
     }
 
+    public function create(){
+        $responseCategory = HttpClient::fetch(
+            "GET",
+            "http://127.0.0.1:8000/api/Category/" 
+        );
+        $category = $responseCategory['data'];
+
+        $responseAuthor = HttpClient::fetch(
+            "GET",
+            "http://127.0.0.1:8000/api/Author/" 
+        );
+        $author = $responseAuthor['data'];
+        
+        return view('create', [
+            'title' => 'test',
+            'icon' => 'test',
+            "categories" => $category,
+            "authors" => $author
+        ]);
+    }
+
     public function edit($id){
         $responseBook = HttpClient::fetch(
             "GET",
@@ -86,13 +107,33 @@ class HomeController extends Controller
             $payload,
             $sampul
         );
+
+        if($responseBook['status'] == false){
+            return back()->withErrors(['msg' => $responseBook['message']]);
+        }
+
         $book = $responseBook['data'];
         return redirect()->route('book.list');
     }
 
     public function update(Request $request, $id){
         $payload = $request->all();
+        // try {
+        //     $request->validate([
+        //         'author_id' => ['required'],
+        //         'category_id' => ['required'],
+        //         'judul' => ['required', 'min:3'],
+        //         'penerbit' => ['required'],
+        //         'kota_penerbitan' => ['required'],
+        //         'ISBN' => ['required', 'min:13'],
+        //         'tahun_terbit' => ['required']
+        //     ]);
+        //     // validate request
 
+        // } catch (\Illuminate\Validation\ValidationException $th) {
+        //     // catch exception for class ValidationException and return error msg
+        //     dd($th);
+        // }
         $sampul = [];
         if($request->file('sampul')){
             $sampul = [ 
@@ -106,6 +147,10 @@ class HomeController extends Controller
             $payload,
             $sampul
         );
+
+        if($responseBook['status'] == false){
+            return back()->withErrors(['msg' => $responseBook['message']]);
+        }
         $book = $responseBook['data'];
         return redirect()->route('book.list');
     }

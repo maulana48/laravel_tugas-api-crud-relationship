@@ -205,6 +205,7 @@ class BookController extends Controller
             // catch exception for class ValidationException and return error msg
 
             return response()->json([
+                'code' => 403,
                 'status' => false,
                 'message' => $th->validator->errors()
             ], 403);

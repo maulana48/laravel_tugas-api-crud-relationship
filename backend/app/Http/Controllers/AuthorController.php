@@ -22,7 +22,7 @@ class AuthorController extends Controller
 
     public function store(Request $request)
     {
-        if(!$request->nama){
+        if(!$request->nama_author){
             return response()->json([
                 'status' => false,
                 'message' => 'Nama author tidak valid',
@@ -86,7 +86,7 @@ class AuthorController extends Controller
 
     public function update(Request $request, Author $author)
     {
-        if(!$request->nama){
+        if(!$request->nama_author){
             return response()->json([
                 'status' => false,
                 'message' => 'Nama author tidak valid',

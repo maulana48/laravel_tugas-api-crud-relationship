@@ -1,38 +1,110 @@
 @extends('components.parent')
 @section('content')
-<div class="p-10">
-    <div class="mb-4">
-        <a href="{{ route('book.list') }}" class="py-[10px] px-[15px] rounded-lg bg-blue-500 text-white">Back to
-            home</a>
-    </div>
-    <!--Card 1-->
-    <div class=" w-full lg:max-w-full lg:flex border border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 ">
-        <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center object-fill" title="Mountain">
-            <img src="http://localhost:8000/{{ $book[0]['sampul'] }}" alt="">
-        </div>
-        <div class="bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-            <div class="mb-8">
-                <p class="text-gray-900 font-bold text-sm mb-2">Judul :<span> {{ $book[0]['judul'] }} </span> </p>
-                <p class="text-gray-900 font-bold text-sm mb-2">Category :<span> {{ $book[2]['nama_category'] }} </span> </p>
-                <p class="text-gray-900 font-bold text-sm mb-2">Penulis :<span> {{ $book[1]['nama_author'] }} </span> </p>
-                <p class="text-gray-900 font-bold text-sm mb-2">Penerbit :<span> {{ $book[0]['penerbit'] }} </span> </p>
-                <p class="text-gray-900 font-bold text-sm mb-2">Kota Penerbitan :<span> {{ $book[0]['kota_penerbitan'] }} </span> </p>
-                <p class="text-gray-900 font-bold text-sm mb-2">ISBN :<span> {{ $book[0]['ISBN'] }} </span> </p><td class="py-4 px-6">
-                
-            </div>
-            <div class="flex items-center gap-4">
-                <a href="{{ route('book.edit', $book[0]['id']) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                <p>|</p>
-                <div class="text-sm">
-                    <form id="delete" action="{{ route('book.destroy', $book[0]['id']) }}" method="post">
-                        @csrf
-                        <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
-                    </form>
+<div class="container mx-auto px-20 text-black">
+
+    <div class="border bg-amber-100 rounded-lg p-6 relative z-10" style="cursor: auto;">
+
+        <div class="flex flex-wrap items-center">
+
+
+            <div class="flex w-full h-48 md:h-64 lg:h-72 relative">
+
+                <div class="w-8/12 pr-4 relative">
+
+
+                    <img src="http://localhost:8000/{{ $book[0]['sampul'] }}"
+                        class="foto w-full h-full object-fill object-top rounded-lg bg-white">
+
                 </div>
+
+                <div class="w-4/12 h-full">
+
+                    <div class="flex flex-col w-full h-full">
+
+                        <div class="flex-1 pb-2">
+
+                            <div class="w-full h-full relative">
+
+                                <img src="http://localhost:8000/{{ $book[0]['sampul'] }}"
+                                    class="foto1 absolute top-0 w-full h-full object-fill object-center rounded-lg bg-white">
+
+                            </div>
+
+                        </div>
+
+                        <div class="flex-1 pt-2">
+
+                            <div class="w-full h-full relative">
+
+                                <img src="http://localhost:8000/{{ $book[0]['sampul'] }}"
+                                    class="foto2 absolute top-0 w-full h-full object-fill object-bottom rounded-lg bg-white">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
 
+
+            <div class="w-full pt-8 flex flex-col justify-between">
+
+                <div>
+
+                    <h2 class="flex items-center font-bold text-xl">Judul
+                    : <span> {{ $book[0]['judul'] }} </span><a href="#" title="Add to Favorites"
+                            class="text-4xl ml-4 border-black-500 text-gray-300 hover:text-red-500 duration-300">&hearts;</a>
+                    </h2>
+
+
+                    <div class="flex flex-wrap text-center pt-4 mb-2">
+
+                        <div class="harga mr-2 mb-2 rounded-full px-3 py-1 text-xs bg-green-400 text-green-900">Category
+                            :<span>{{ $book[2]['nama_category'] }} </span></div>
+
+                        <div
+                            class="harga1 mr-2 mb-2 rounded-full px-3 py-1 text-xs bg-red-400 line-through text-green-900">
+                            Penulis :<span> {{ $book[1]['nama_author'] }}</span></div>
+
+                    </div>
+
+                    <p class="text-xs leading-relaxed">Deskripsi</p>
+
+                    <ul class="text-xs mt-4 list-disc list-inside leading-relaxed">
+
+                        <li>Penerbit :<span> {{ $book[0]['penerbit'] }}</li>
+
+                        <li>Kota Penerbitan :<span> {{ $book[0]['kota_penerbitan'] }} </span></li>
+
+                        <li>ISBN :<span> {{ $book[0]['ISBN'] }} </span></li>
+
+                    </ul>
+
+                </div>
+
+                <div class="w-full sm:flex-1 grid gap-4 grid-cols-2 pt-6">
+
+                    <a href="{{ route('book.list') }}"
+                        class="flex items-center justify-center text-center relative text-white font-bold text-sm bg-gray-200 text-gray-800 px-8 py-3 rounded-lg shadow-lg hover:shadow-none hover:opacity-75">Back
+                        to home</a>
+
+
+                    <a href="{{ route('book.edit', $book[0]['id'] ) }}" x-on:click="#"
+                        class="w-full block text-center relative text-white font-bold text-sm bg-teal-800 px-4 py-3 rounded-lg shadow-lg hover:shadow-none hover:opacity-75">Edit book data</a>
+
+                </div>
+
+            </div>
+
+
         </div>
+
     </div>
 </div>
 
 @endsection
+
+
